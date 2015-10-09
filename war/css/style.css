@@ -1,0 +1,32 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+div.calculator-wrapper {
+  display:table-cell; 
+  vertical-align:middle;
+}
+
+.btn-primary.calculator-btn {
+	width:35px;
+	height: 35px;
+	margin-right:10px;
+}
+
+.btn-primary.calculator-btn.operator {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a90329+28,8f0222+74,6d0019+100 */
+	background: #a90329; /* Old browsers */
+	background: -moz-linear-gradient(top,  #a90329 28%, #8f0222 74%, #6d0019 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(28%,#a90329), color-stop(74%,#8f0222), color-stop(100%,#6d0019)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #a90329 28%,#8f0222 74%,#6d0019 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #a90329 28%,#8f0222 74%,#6d0019 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #a90329 28%,#8f0222 74%,#6d0019 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #a90329 28%,#8f0222 74%,#6d0019 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+
+	border-color: #6D002B;
+}
