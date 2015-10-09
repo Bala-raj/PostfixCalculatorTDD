@@ -30,3 +30,7 @@ div.calculator-wrapper {
 
 	border-color: #6D002B;
 }
+
+h2.expression {
+	height: 33px;
+}
