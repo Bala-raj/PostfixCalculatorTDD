@@ -1,0 +1,136 @@
+/**
+ * treat Maven as a repository, as well as the war/WEB-INF/lib folder to include
+ * dependencies that are in version control already
+ */
+repositories {
+  mavenCentral()
+  flatDir {
+    dirs 'war/WEB-INF/lib'
+  }
+}
+
+/**
+ * required for referencing "appengine" plugin
+ */
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  
+  dependencies {
+    classpath 'com.google.appengine:gradle-appengine-plugin:1.9.26'
+  }
+}
+
+apply plugin: "java"
+apply plugin: "appengine"
+apply plugin: "eclipse"
+
+/**
+ * required for "appengine" plugin
+ */
+apply plugin: "jetty"
+project.webAppDirName = 'war'
+
+
+/**
+ * these are required dependencies not included in version control
+ */
+dependencies {
+  testCompile group: 'junit', name: 'junit', version: '4.+'
+  
+  compile fileTree(dir: 'war/WEB-INF/lib', include: ['*.jar']) 
+ 
+  compile 'com.google.appengine:appengine-api-labs:1.9.26'
+  compile 'com.google.appengine:appengine-endpoints-deps:1.9.26'
+  compile 'com.google.appengine:appengine-endpoints:1.9.26'
+  compile 'com.google.appengine:appengine-jsr107cache:1.9.26'
+  compile 'com.google.appengine:appengine-jsr107cache:1.9.26'
+  compile 'org.datanucleus:datanucleus-api-jdo:3.1.3'
+  compile 'org.datanucleus:datanucleus-api-jpa:3.1.3'
+  compile 'com.google.appengine.orm:datanucleus-appengine:2.1.2'
+  compile 'org.datanucleus:datanucleus-core:3.1.3'
+  compile 'org.apache.geronimo.specs:geronimo-jpa_2.0_spec:1.0'
+  compile 'net.sf.jsr107cache:jsr107cache:1.1'
+  compile 'org.ow2.asm:asm:4.0'
+  compile 'javax.jdo:jdo-api:3.0.1'
+  compile 'javax.transaction:jta:1.1'
+  compile 'javax.servlet:servlet-api:2.5'
+  compile 'org.jboss.resteasy:resteasy-jaxrs:3.0.13.Final'
+  compile 'org.jboss.resteasy:resteasy-jackson2-provider:3.0.13.Final'
+  
+  // keep this at the bottom as it causes conflicts if at the top
+  compile 'com.google.appengine:appengine-api-1.0-sdk:1.9.26'
+
+ 
+}
+
+/***/
+configurations {
+  provided
+  someBoringConfig
+}
+eclipse {
+  //if you want parts of paths in resulting file to be replaced by variables (files):
+  pathVariables 'GRADLE_HOME': file('/usr/local/gradle-2.7')
+
+  classpath {
+    //you can tweak the classpath of the Eclipse project by adding extra configurations:
+    plusConfigurations += [ configurations.provided ]
+
+    //you can also remove configurations from the classpath:
+    minusConfigurations += [ configurations.someBoringConfig ]
+
+    //if you want to append extra containers:
+    //containers 'someFriendlyContainer', 'andYetAnotherContainer'
+
+    //customizing the classes output directory:
+    defaultOutputDir = file('war/WEB-INF/classes')
+
+    //default settings for downloading sources and Javadoc:
+    downloadSources = true
+    downloadJavadoc = false
+  }
+}
+
+/***/
+
+
+/**
+ * preserves existing structure of src and test folder without conforming to Maven structure.
+ */
+sourceSets {
+  main {
+    java {
+      srcDir 'src'
+    }
+    output.classesDir = 'war/WEB-INF/classes'
+  }
+  test {
+    java {
+      srcDir 'test'
+    }
+    output.classesDir = 'bin/test-classes'
+  }
+}
+
+
+/**
+ * sets logging to a level that provides information about the failing tests
+ */
+test {
+  testLogging {
+    exceptionFormat = 'full'
+  }
+}
+
+
+/**
+ * shows the location of JAR files retrieved from remote and local repositories
+ *
+ * usage: $ gradle showMeCache
+ *
+ */
+task showMeCache << {
+  configurations.compile.each { println it }
+}
