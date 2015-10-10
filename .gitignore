@@ -3,5 +3,7 @@
 classes
 *.jar
 .settings
+.classpath
 .gradle
 bin
+
