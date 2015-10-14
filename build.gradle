@@ -73,6 +73,7 @@ configurations {
 eclipse {
   //if you want parts of paths in resulting file to be replaced by variables (files):
   pathVariables 'GRADLE_HOME': file('/usr/local/gradle-2.7')
+  pathVariables 'APPENGINE_HOME': file('/usr/local/appengine/appengine-java-sdk-1.9.26')
 
   classpath {
     //you can tweak the classpath of the Eclipse project by adding extra configurations:
@@ -133,4 +134,9 @@ test {
  */
 task showMeCache << {
   configurations.compile.each { println it }
+}
+
+task showMeEnv << {
+  println System.getenv()['APPENGINE_HOME']
+  println System.getenv()['appengine.sdk.root']
 }
