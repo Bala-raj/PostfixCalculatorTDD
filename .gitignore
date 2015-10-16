@@ -6,4 +6,5 @@ classes
 .classpath
 .gradle
 bin
+node_modules
 
