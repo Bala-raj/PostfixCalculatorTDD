@@ -6,6 +6,9 @@ function CalculatorController() {
 	
 	var _self = this;
 	
+	var IS_OPERATOR = true;
+	var IS_NUMBER = false;
+	
 	var calculatorView = new CalculatorView();
 	var calculatorService = new CalculatorService();
 	
@@ -23,7 +26,20 @@ function CalculatorController() {
 		calculatorView.bindKeypressEvent(observer);
 		
 		observer.progress(function(data) {
-			console.debug(data.keyTriggered);
+			var keyTriggered = data.keyTriggered;
+			console.debug(keyTriggered);
+			switch(calculatorService.isOperator(keyTriggered)) {
+				case IS_OPERATOR:
+					console.debug('is operator ' + keyTriggered);
+					//calculatorService.applyOperation(keyTriggered, expression);
+					break;
+				case IS_NUMBER:
+					console.debug('is number ' + keyTriggered);
+					
+				    break;
+			}
+			
+			calculatorService.sendKeyToServer(keyTriggered); 
 		});
 	}
 	

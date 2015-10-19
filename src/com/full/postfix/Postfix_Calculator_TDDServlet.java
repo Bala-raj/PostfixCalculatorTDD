@@ -37,4 +37,13 @@ public class Postfix_Calculator_TDDServlet extends HttpServlet {
 		
 		return employeeString;
 	}
+	
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.setContentType("text/plain");
+		
+		//req.getAttribute("keyTriggered");
+		resp.getWriter().println("Hello, world POST");
+		
+		
+	}
 }
