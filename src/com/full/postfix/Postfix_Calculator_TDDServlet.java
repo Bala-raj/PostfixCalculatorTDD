@@ -9,4 +9,13 @@ public class Postfix_Calculator_TDDServlet extends HttpServlet {
 		resp.setContentType("text/plain");
 		resp.getWriter().println("Hello, world");
 	}
+	
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.setContentType("text/plain");
+		
+		//req.getAttribute("keyTriggered");
+		resp.getWriter().println("Hello, world POST");
+		
+		
+	}
 }

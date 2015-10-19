@@ -4,6 +4,11 @@ describe('CalculatorService', function() {
 	
 	beforeEach(function() {
 		calculatorService = new CalculatorService();
+		
+		// Mock
+		calculatorService.sendKeyToServer = function(key) {
+			console.debug('fakeAjaxCall with data: ' + key);
+		}
 	});
 
 	describe('CalculatorService isOperator and isNumber tests', function() {

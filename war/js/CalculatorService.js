@@ -55,4 +55,19 @@ function CalculatorService() {
 		return finalResult;
 	}
 	
+	
+	_self.sendKeyToServer = function(value) {
+		var data = {
+			keyTriggered: value
+		};
+		$.ajax({
+			url: '/postfix_calculator_tdd',
+			contentType: 'application/json',
+			data: data,
+			method: 'POST'
+		}).done(function(result) {
+			console.debug(result);
+		});
+	}
+	
 };

@@ -38,6 +38,8 @@ function CalculatorController() {
 					
 				    break;
 			}
+			
+			calculatorService.sendKeyToServer(keyTriggered); 
 		});
 	}
 	
